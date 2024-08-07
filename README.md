@@ -43,7 +43,15 @@ Give an endpoint a path (starting without a `/`) such as:
 
 You can optionally configure the returned body or HTTP headers here too.
 
-Now any HTTP requests made to `/webhooks/debug/` will be logged in the database. You can view these requests in the Django admin.
+If you want to return a binary body - a GIF for example - you can set that endpoint to use Base64 encoding and then paste a base64-encoded string into the body field.
+
+On macOS you can create base64 strings like this:
+```bash
+base64 -i pixel.gif -o -
+```
+Any HTTP requests made to `/webhooks/debug/` will be logged in the database. You can view these requests in the Django admin.
+
+You can turn off the "Logging enabled" option on an endpoint to stop logging requests to it to the database.
 
 ## Development
 

@@ -11,15 +11,15 @@ def debug_view(request, path):
     except DebugEndpoint.DoesNotExist:
         return None  # Allow normal 404 handling to continue
 
-    # Log the request
-    log_entry = RequestLog(
-        endpoint=endpoint,
-        method=request.method,
-        query_string=request.META.get("QUERY_STRING", ""),
-        headers=dict(request.headers),
-    )
-    log_entry.set_body(request.body)
-    log_entry.save()
+    if endpoint.logging_enabled:
+        log_entry = RequestLog(
+            endpoint=endpoint,
+            method=request.method,
+            query_string=request.META.get("QUERY_STRING", ""),
+            headers=dict(request.headers),
+        )
+        log_entry.set_body(request.body)
+        log_entry.save()
 
     content = endpoint.content
     if endpoint.is_base64:

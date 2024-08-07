@@ -13,8 +13,8 @@ QUERY_STRING_TRUNCATE = 16
 
 @admin.register(DebugEndpoint)
 class DebugEndpointAdmin(admin.ModelAdmin):
-    list_display = ("path", "status_code")
-    search_fields = ("path",)
+    list_display = ("path", "status_code", "logging_enabled")
+    list_filter = ("logging_enabled",)
 
 
 @admin.register(RequestLog)

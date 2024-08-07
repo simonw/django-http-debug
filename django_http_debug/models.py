@@ -9,6 +9,7 @@ class DebugEndpoint(models.Model):
     headers = models.JSONField(default=dict, blank=True)
     content = models.TextField(blank=True)
     is_base64 = models.BooleanField(default=False)
+    logging_enabled = models.BooleanField(default=True)
 
     def __str__(self):
         return self.path
