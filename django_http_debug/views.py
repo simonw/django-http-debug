@@ -15,6 +15,7 @@ def debug_view(request, path):
     log_entry = RequestLog(
         endpoint=endpoint,
         method=request.method,
+        query_string=request.META.get("QUERY_STRING", ""),
         headers=dict(request.headers),
     )
     log_entry.set_body(request.body)

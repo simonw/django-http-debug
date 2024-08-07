@@ -20,6 +20,7 @@ class DebugEndpoint(models.Model):
 class RequestLog(models.Model):
     endpoint = models.ForeignKey(DebugEndpoint, on_delete=models.CASCADE)
     method = models.CharField(max_length=10)
+    query_string = models.CharField(max_length=255, blank=True)
     headers = models.JSONField()
     body = models.TextField(blank=True)
     is_base64 = models.BooleanField(default=False)

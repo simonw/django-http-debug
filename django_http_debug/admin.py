@@ -8,6 +8,8 @@ from .models import DebugEndpoint, RequestLog
 sequence_re = re.compile(r"((?:\\x[0-9a-f]{2})+)")
 octet_re = re.compile(r"(\\x[0-9a-f]{2})")
 
+QUERY_STRING_TRUNCATE = 16
+
 
 @admin.register(DebugEndpoint)
 class DebugEndpointAdmin(admin.ModelAdmin):
@@ -17,10 +19,18 @@ class DebugEndpointAdmin(admin.ModelAdmin):
 
 @admin.register(RequestLog)
 class RequestLogAdmin(admin.ModelAdmin):
-    list_display = ("timestamp", "endpoint", "method", "body_preview", "is_base64")
+    list_display = (
+        "timestamp",
+        "endpoint",
+        "method",
+        "query_string_truncated",
+        "body_preview",
+        "is_base64",
+    )
     list_filter = ("endpoint", "method", "is_base64")
     readonly_fields = (
         "endpoint",
+        "query_string",
         "method",
         "headers",
         "body",
@@ -28,13 +38,19 @@ class RequestLogAdmin(admin.ModelAdmin):
         "is_base64",
         "timestamp",
     )
-    search_fields = ("endpoint__path",)
 
     def has_add_permission(self, request):
         return False
 
     def has_change_permission(self, request, obj=None):
         return False
+
+    def query_string_truncated(self, obj):
+        return obj.query_string[:QUERY_STRING_TRUNCATE] + (
+            "…" if len(obj.query_string) > QUERY_STRING_TRUNCATE else ""
+        )
+
+    query_string_truncated.short_description = "Query string"
 
     def body_preview(self, obj):
         body = obj.get_body()
