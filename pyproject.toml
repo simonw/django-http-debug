@@ -1,6 +1,6 @@
 [project]
 name = "django-http-debug"
-version = "0.1a0"
+version = "0.2"
 description = "Django app for creating database-backed HTTP debug endpoints"
 readme = "README.md"
 requires-python = ">=3.8"
