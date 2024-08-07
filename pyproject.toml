@@ -1,0 +1,28 @@
+[project]
+name = "django-http-debug"
+version = "0.1"
+description = "Django app for creating database-backed HTTP debug endpoints"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{name = "Simon Willison"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/simonw/django-http-debug"
+Changelog = "https://github.com/simonw/django-http-debug/releases"
+Issues = "https://github.com/simonw/django-http-debug/issues"
+CI = "https://github.com/simonw/django-http-debug/actions"
+
+
+[project.optional-dependencies]
+test = ["pytest"]
