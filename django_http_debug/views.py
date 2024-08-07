@@ -1,3 +1,4 @@
+import base64
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import DebugEndpoint, RequestLog
@@ -19,9 +20,14 @@ def debug_view(request, path):
     log_entry.set_body(request.body)
     log_entry.save()
 
-    # Prepare the response
+    content = endpoint.content
+    if endpoint.is_base64:
+        content = base64.b64decode(content)
+
     response = HttpResponse(
-        content=endpoint.content, status=endpoint.status_code, content_type="text/plain"
+        content=content,
+        status=endpoint.status_code,
+        content_type=endpoint.content_type,
     )
     for key, value in endpoint.headers.items():
         response[key] = value

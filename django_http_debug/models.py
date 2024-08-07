@@ -5,11 +5,16 @@ import base64
 class DebugEndpoint(models.Model):
     path = models.CharField(max_length=255, unique=True)
     status_code = models.IntegerField(default=200)
+    content_type = models.CharField(max_length=64, default="text/plain; charset=utf-8")
     headers = models.JSONField(default=dict, blank=True)
     content = models.TextField(blank=True)
+    is_base64 = models.BooleanField(default=False)
 
     def __str__(self):
         return self.path
+
+    def get_absolute_url(self):
+        return f"/{self.path}"
 
 
 class RequestLog(models.Model):

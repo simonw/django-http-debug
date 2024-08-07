@@ -17,7 +17,7 @@ class DebugEndpointAdmin(admin.ModelAdmin):
 
 @admin.register(RequestLog)
 class RequestLogAdmin(admin.ModelAdmin):
-    list_display = ("endpoint", "method", "timestamp", "body_preview", "is_base64")
+    list_display = ("timestamp", "endpoint", "method", "body_preview", "is_base64")
     list_filter = ("endpoint", "method", "is_base64")
     readonly_fields = (
         "endpoint",
