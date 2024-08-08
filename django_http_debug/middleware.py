@@ -1,4 +1,3 @@
-from django.http import Http404
 from .views import debug_view
 
 
