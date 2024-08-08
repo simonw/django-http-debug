@@ -7,6 +7,8 @@
 
 Django app for creating database-backed HTTP debug endpoints
 
+Background on this project: [django-http-debug, a new Django app mostly written by Claude](https://simonwillison.net/2024/Aug/8/django-http-debug/)
+
 ## Installation
 
 Install this library using `pip`:
