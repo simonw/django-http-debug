@@ -27,7 +27,3 @@ CI = "https://github.com/simonw/django-http-debug/actions"
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-django"]
-
-[tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "tests.test_project.settings"
-pythonpath = ["."]
